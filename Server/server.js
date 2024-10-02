@@ -1,8 +1,32 @@
-const express = require('express')
-const app = express()
+require('dotenv').config();
 
-app.get("/api", (req, res) => {
-    res.json({"users": ["userOne", "userTwo", "userThree"]})
-})
+const express = require('express');
+const expressLayout = require('express-ejs-layouts');
 
-app.listen(5000, () => { console.log("server started on port 5000") })
+const connectDB = require('./routes/config/db');
+
+const app = express();
+const PORT = 5000 
+
+//connect to DB
+
+connectDB();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static('public'));
+
+//templating engine
+app.use(expressLayout);
+app.set('layout', './layouts/main');
+app.set('view engine', 'ejs');
+
+
+
+app.use('/', require('./routes/main'));
+
+app.listen(PORT, () => {
+    console.log('App listening on port 5000');
+});
+
