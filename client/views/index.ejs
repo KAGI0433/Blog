@@ -1,0 +1,37 @@
+<div class="author">
+    <h1 class="author__heading">Lady Whistledown</h1>
+    <p class="author__body">Celebrity gossip</p>
+</div>
+
+<img src="/img/brii.jpg" alt="" class="hero-image" width="981" height="528">
+
+
+    <div class="container mt-5 py-5">
+        <h1>Latest Posts</h1>
+    
+<% posts.forEach(Post => { %>
+
+        <div class="card"> 
+          
+          <h5 class="card-title"><%= Post.title %></h5>
+
+            <div class="card-body">
+             
+              <p class="card-text"> <%= Post.content.slice(0, 99) %></p>
+              
+              <p class="text-muted">Published at<%= Post.createdAt %></p>
+
+              
+              <a href="/post/<%= Post._id %>" class="btn btn-primary">Read More.</a> 
+              <a href="/delete/<%= Post._id %>" class="btn btn-primary2">Delete</a>
+            </div>
+
+              
+           
+          </div>
+
+<%}) %>
+
+
+
+</div>
